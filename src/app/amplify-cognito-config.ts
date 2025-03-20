@@ -1,21 +1,19 @@
 "use client";
 
-import { Amplify, type ResourcesConfig } from "aws-amplify";
+import { Amplify } from "aws-amplify";
+import { authConfig } from "@/config/auth-config-export";
 
-export const authConfig: ResourcesConfig["Auth"] = {
-  Cognito: {
-    userPoolId: String(process.env.NEXT_PUBLIC_USER_POOL_ID),
-    userPoolClientId: String(process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID),
-  },
-};
+export function configureAmplifyClientSide() {
+  Amplify.configure(
+    {
+      Auth: authConfig,
+    },
+    { ssr: true }
+  );
+}
 
-Amplify.configure(
-  {
-    Auth: authConfig,
-  },
-  { ssr: true }
-);
-
+// Componente que pode ser usado em layouts ou páginas do cliente
 export default function ConfigureAmplifyClientSide() {
+  configureAmplifyClientSide();
   return null;
 }
