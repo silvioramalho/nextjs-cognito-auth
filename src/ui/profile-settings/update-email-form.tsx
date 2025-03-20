@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button } from "@/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
 import {
   handleConfirmUserAttribute,
   handleUpdateUserAttribute,
@@ -14,8 +15,8 @@ import useAuthUser from "@/app/hooks/use-auth-user";
 
 export default function UpdateEmailForm() {
   const user = useAuthUser();
-  const [status, dispatch] = useFormState(handleUpdateUserAttribute, "");
-  const [confirmStatus, dispatchConfirm] = useFormState(
+  const [status, dispatch] = useActionState(handleUpdateUserAttribute, "");
+  const [confirmStatus, dispatchConfirm] = useActionState(
     handleConfirmUserAttribute,
     undefined
   );

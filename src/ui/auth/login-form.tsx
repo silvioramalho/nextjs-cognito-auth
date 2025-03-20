@@ -9,11 +9,12 @@ import {
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "@/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
 import { handleSignIn } from "@/lib/cognitoActions";
 import Link from "next/link";
 
 export default function LoginForm() {
-  const [errorMessage, dispatch] = useFormState(handleSignIn, undefined);
+  const [errorMessage, dispatch] = useActionState(handleSignIn, undefined);
   return (
     <form action={dispatch} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">

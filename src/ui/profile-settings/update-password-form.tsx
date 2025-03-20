@@ -2,10 +2,11 @@
 import { ExclamationCircleIcon, KeyIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
 import { handleUpdatePassword } from "@/lib/cognitoActions";
 
 export default function UpdatePasswordForm() {
-  const [status, dispatch] = useFormState(handleUpdatePassword, undefined);
+  const [status, dispatch] = useActionState(handleUpdatePassword, undefined);
 
   return (
     <form action={dispatch}>

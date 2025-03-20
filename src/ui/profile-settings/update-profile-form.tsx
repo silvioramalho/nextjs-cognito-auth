@@ -2,12 +2,13 @@
 import { ExclamationCircleIcon, UserIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
 import { handleUpdateUserAttribute } from "@/lib/cognitoActions";
 import useAuthUser from "@/app/hooks/use-auth-user";
 
 export default function UpdateProfileForm() {
   const user = useAuthUser();
-  const [status, dispatch] = useFormState(handleUpdateUserAttribute, "");
+  const [status, dispatch] = useActionState(handleUpdateUserAttribute, "");
 
   return (
     <form action={dispatch}>
