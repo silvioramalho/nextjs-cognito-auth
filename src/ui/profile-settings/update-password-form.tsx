@@ -1,18 +1,29 @@
 "use client";
+
 import { ExclamationCircleIcon, KeyIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
 import { useActionState } from "react";
 import { handleUpdatePassword } from "@/lib/cognitoActions";
+import { useEffect, useState } from "react";
 
 export default function UpdatePasswordForm() {
+  const [mounted, setMounted] = useState(false);
   const [status, dispatch] = useActionState(handleUpdatePassword, undefined);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <form action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+          <label htmlFor="current_password" className="mb-2 block text-sm font-medium">
             Current Password
           </label>
           <div className="relative mt-2 rounded-md">
@@ -31,7 +42,7 @@ export default function UpdatePasswordForm() {
           </div>
         </div>
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+          <label htmlFor="new_password" className="mb-2 block text-sm font-medium">
             New Password
           </label>
           <div className="relative mt-2 rounded-md">
